@@ -50,18 +50,12 @@ function OnChat(name,message,team)
     
     local clients = Server.GetClients();
     
-    Debug.Break("Point 1")
-    
     -- Is it a client saying this?
     local sayer = FindClient(true, function(c) return c.Name == name end)
-    
-    Debug.Break("Point 2. Sayer: " .. tostring(sayer))
     
     if sayer ~= nil then
         if team then
             local sayerTeam = sayer.Edict:GetFieldFloat("team")
-            
-            Debug.Break("Point 3. SayerTeam: " .. tostring(sayerTeam))
             
             -- Only print message and play sound to teammates
             ForEachClient(true, function(c)
@@ -85,7 +79,7 @@ function OnChat(name,message,team)
             
             -- Send a sound for all players
             if cvar_oldstylechat_playsound:GetBool() then
-                ForEachClient(true,function(c) Debug.Break("Sound loop - nonteam",c); Builtins.LocalSound(c.Edict,SOUND_TALK) end)
+                ForEachClient(true,function(c) Builtins.LocalSound(c.Edict,SOUND_TALK) end)
             end
         end
     end
